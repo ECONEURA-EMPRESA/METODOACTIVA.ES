@@ -4,9 +4,9 @@ import { signInAnonymously } from 'firebase/auth';
 
 /**
  * Hook de Inteligencia Artificial - V3 CLOUD RUN (Enterprise)
- * Conecta al Backend Python en Google Cloud con Seguridad Zero-Trust.
+ * Conecta al Backend Python a través del Proxy de Firebase Hosting.
  */
-const BACKEND_URL = "https://metodo-activa-brain-476151355322.us-central1.run.app/api/v1/chat";
+const BACKEND_URL = "/api/v1/chat";
 
 export const useAuroraAI = () => {
     const [isLoading, setIsLoading] = useState(false);

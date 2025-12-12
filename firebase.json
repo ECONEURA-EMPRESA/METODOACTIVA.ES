@@ -1,3 +1,4 @@
+{
     "hosting": {
         "public": "frontend/dist",
         "ignore": [
@@ -7,12 +8,11 @@
         ],
         "rewrites": [
             {
-                "source": "/api/chat",
-                "function": "chatWithGemini"
-            },
-            {
-                "source": "/api/dashboard",
-                "function": "getDashboardData"
+                "source": "/api/**",
+                "run": {
+                    "serviceId": "metodo-activa-brain",
+                    "region": "us-central1"
+                }
             },
             {
                 "source": "**",
