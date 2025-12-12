@@ -1,69 +1,51 @@
-import vertexai
-from vertexai.generative_models import GenerativeModel
-from google.cloud import discoveryengine_v1beta as discoveryengine
+import google.generativeai as genai
 from app.core.config import settings
 
-# 🧠 CEREBRO RAG DE EXCELENCIA
-# Combina Vertex AI Search (Datos) + Gemini Pro (Razonamiento).
+# 🧠 CEREBRO SIMPLE (GEMINI DIRECTO)
+# Implementación robusta usando API KEY según petición del usuario.
 
 class VertexService:
     def __init__(self):
-        # Inicializar clientes de Google Cloud una sola vez (Singleton Pattern)
-        self.project_id = settings.PROJECT_ID
-        self.location = settings.LOCATION
-        self.search_client = discoveryengine.SearchServiceClient()
+        # Configurar con API Key (Resiliente)
+        if not settings.GEMINI_API_KEY:
+            print("⚠️ WARNING: GEMINI_API_KEY no encontrada. El chat fallará.")
         
-        # Configurar Gemini (Vertex AI SDK)
-        vertexai.init(project=self.project_id, location=settings.VERTEX_REGION)
-        self.model = GenerativeModel("gemini-1.5-pro")
-
-    async def search_book(self, query: str) -> str:
-        """
-        🔍 Busca en el PDF del libro "Método Activa" usando Vector Search.
-        Retorna los fragmentos más relevantes.
-        """
-        # ID del Data Store creado en Agent Builder (Lo definiremos al desplegar infra)
-        serving_config = f"projects/{self.project_id}/locations/global/collections/default_collection/dataStores/metodo-activa-book/servingConfigs/default_search"
+        genai.configure(api_key=settings.GEMINI_API_KEY)
         
-        request = discoveryengine.SearchRequest(
-            serving_config=serving_config,
-            query=query,
-            page_size=3, # Top 3 fragmentos
-            content_search_spec={"snippet_spec": {"return_snippet": True}}
-        )
-        
-        response = self.search_client.search(request)
-        
-        context = ""
-        for result in response.results:
-            data = result.document.derived_struct_data
-            context += f"\n[Fragmento]: {data.get('snippets', [{}])[0].get('snippet', '')}"
-            
-        return context
+        # Modelo Gemini Pro optimizado
+        self.model = genai.GenerativeModel('gemini-1.5-flash')
 
     async def generate_response(self, user_message: str, user_context: str) -> str:
         """
-        🗣️ Genera la respuesta empática basada en el libro.
+        🗣️ Genera la respuesta empática usando Gemini Flash.
         """
-        # 1. Recuperar conocimiento real del libro (RAG)
-        book_knowledge = await self.search_book(user_message)
-        
-        # 2. Prompt de Ingeniería (Chain of Thought)
-        system_prompt = f"""
-        Eres Aurora, experta en el Método Activa.
-        Usa EXCLUSIVAMENTE la siguiente información del libro para responder:
-        {book_knowledge}
-        
-        Contexto del usuario: {user_context}
-        
-        Instrucciones:
-        1. Responde con empatía.
-        2. Cita el pilar (Cuerpo/Mente/Corazón) si aparece en el texto.
-        3. Si la respuesta no está en el libro, di que no estás segura pero ofrece ayuda general.
-        """
-        
-        response = self.model.generate_content([system_prompt, user_message])
-        return response.text
+        try:
+            # Prompt de Identidad (System Prompt)
+            identity = """
+            Eres Aurora, la asistente virtual del libro 'Método Activa' de Aurora Del Río.
+            Tu misión es ayudar a terapeutas, cuidadores de ancianos y padres de niños especiales (TDAH/Autismo).
+            
+            PRINCIPIOS:
+            1. EMPATÍA RADICAL: Hablas con calidez. Entiendes el agotamiento del cuidador.
+            2. EXPERTA EN MÚSICA: Sabes que la musicoterapia conecta cerebro y emoción.
+            3. VENTA SUAVE: Si preguntan por soluciones profundas, sugiere el libro '21 Sesiones de Musicoterapia'.
+            
+            ESTILO:
+            - Respuestas concisas pero amorosas.
+            - Usa emojis suaves (🎵, ✨, 💙).
+            - No inventes hechos médicos.
+            """
+            
+            # Generar contenido (Prompt + Mensaje)
+            # Nota: Gemini 1.5 Flash soporta system instructions, pero lo simulamos aquí para compatibilidad.
+            prompt = f"{identity}\n\nContexto Usuario: {user_context}\nPregunta: {user_message}"
+            
+            response = self.model.generate_content(prompt)
+            return response.text
+            
+        except Exception as e:
+            print(f"❌ Error Gemini API: {e}")
+            return "Lo siento, mi conexión musical está interferida. ¿Podrías repetirlo? 🎵"
 
 # Instancia global
 vertex_service = VertexService()

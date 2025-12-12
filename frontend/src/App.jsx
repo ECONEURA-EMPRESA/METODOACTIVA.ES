@@ -42,7 +42,7 @@ function App() {
   const [showContentModal, setShowContentModal] = useState(false);
   const [hasRegistered, setHasRegistered] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
-  const [showCookieBanner, setShowCookieBanner] = useState(true);
+  const [showCookieBanner, setShowCookieBanner] = useState(false);
 
   useEffect(() => {
     let ticking = false;
@@ -93,7 +93,7 @@ function App() {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
-  const openAmazon = () => { window.open("https://www.amazon.es", "_blank", "noopener,noreferrer"); };
+  const openAmazon = () => { triggerConfetti(); window.open("https://www.amazon.es", "_blank", "noopener,noreferrer"); };
   const handleAccessRequest = () => { if (hasRegistered) { setShowContentModal(true); } else { setShowLeadModal(true); } };
   const handleLeadSuccess = () => {
     setHasRegistered(true);

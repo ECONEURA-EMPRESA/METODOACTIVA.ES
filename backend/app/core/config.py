@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     
     # 🧠 AI Config
     VERTEX_REGION: str = "us-central1"
+    GEMINI_API_KEY: str | None = None
     
     class Config:
         case_sensitive = True
