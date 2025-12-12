@@ -1,47 +1,55 @@
-# 🎵 Método Activa: El Arte de Conectar
+# 🎵 Método Activa: El Arte de Conectar Personas
 
-> **"Donde la Neurociencia se encuentra con la Emoción."**
+> **"Cuando las palabras fallan, la música habla."**
 
-[![Website](https://img.shields.io/badge/Visitar-Web_Oficial-EC008C?style=for-the-badge&logo=google-chrome&logoColor=white)](https://project-c465bc45-299b-470d-8b6.web.app)
-[![AI](https://img.shields.io/badge/Powered_By-Aurora_AI-F7941D?style=for-the-badge&logo=google-gemini&logoColor=white)]()
+[![Website](https://img.shields.io/badge/Web_Oficial-Visitar-EC008C?style=for-the-badge&logo=google-chrome&logoColor=white)](https://project-c465bc45-299b-470d-8b6.web.app)
+[![Status](https://img.shields.io/badge/Estado-Producción-success?style=for-the-badge)]()
 
-**Método Activa** es la plataforma digital oficial de **Aurora Del Río**, diseñada para transformar la manera en que entendemos la musicoterapia y la salud cognitiva. Más que una web, es una experiencia inmersiva de calma, conexión y tecnología puesta al servicio de las personas.
-
----
-
-## ✨ La Experiencia
-Explora cómo la tecnología se fusiona con el bienestar:
-
-### 🧠 Inteligencia Artificial Empática
-Conoce a **"Aurora"**, nuestra asistente virtual. A diferencia de los chatbots tradicionales, Aurora ha sido entrenada con principios de psicología y musicoterapia. No solo responde dudas; escucha, entiende el contexto emocional y ofrece apoyo las 24/7 con un tono cálido y humano.
-
-### 🎨 Neuroestética Digital
-Cada color, animación y espacio de esta plataforma ha sido diseñado siguiendo principios neurológicos.
-*   **Diseño Calmante:** Reduce la carga cognitiva y genera paz mental al navegar.
-*   **Navegación Inercial:** Un desplazamiento suave ("Luxury Scroll") que da peso y elegancia a la experiencia.
-
-### 📱 Tecnología Invisible
-*   **Acceso Instantáneo:** Funciona como una App nativa en tu móvil (PWA). Sin descargas, disponible offline.
-*   **Conexión Humana:** Integración directa con WhatsApp para hablar con personas reales cuando lo necesites.
-*   **Comunidad Viva:** Visualización en tiempo real de la comunidad que está transformando sus vidas con el método.
+**Método Activa** es la plataforma tecnológica que da soporte al libro **"21 Sesiones de Musicoterapia para Conectar"** de Aurora Del Río. Un recurso esencial diseñado para **terapeutas, cuidadores de mayores y padres de niños con necesidades especiales** (TDAH, Autismo).
 
 ---
 
-## � Sobre el Método
-El **Método Activa** utiliza la música, el ritmo y el movimiento para reactivar la memoria en mayores y fomentar el vínculo emocional en niños. Es una metodología probada que ahora, gracias a esta plataforma, está al alcance de todos.
+## 🎯 Nuestra Misión: Conectar a través del Arte
+En un mundo donde la soledad y la desconexión son epidemias silenciosas, el Método Activa utiliza la **Cultura y las Bellas Artes** (específicamente la música) como herramientas clínicas y emocionales para:
 
-> *"La música no es solo arte, es biología."* — Aurora Del Río.
+1.  **Derrumbar el muro del Alzheimer:** Ayudar a los hijos a reconectar con la mirada de sus padres cuando la memoria se apaga.
+2.  **Calmar el ruido del TDAH:** Ofrecer a los padres un lenguaje rítmico para sintonizar con la frecuencia de sus hijos.
+3.  **Cuidar al Cuidador:** Proporcionar espacios de belleza y respiro para evitar el "burnout" emocional.
+
+> *"La musicoterapia no es magia, es biología. Es la llave maestra para abrir puertas que parecían cerradas para siempre."*
+
+---
+
+## 📘 El Libro: Una Herramienta Técnica y Humana
+Esta plataforma es la extensión digital del manual físico. Ofrece una experiencia inmersiva para potenciar los efectos de las 21 sesiones:
+
+### 🧩 Para Terapeutas y Profesionales
+*   **Protocolos Estructurados:** Sesiones diseñadas con rigor clínico para ser replicadas en consulta o residencias.
+*   **Recursos Digitales:** Audios de alta fidelidad y guías paso a paso accesibles desde la web.
+
+### 🏡 Para Familias y Cuidadores
+*   **Asistente IA 24/7:** "Aurora", nuestra inteligencia artificial, resuelve dudas sobre cómo aplicar los ejercicios en momentos de crisis (agitación nocturna, bloqueos emocionales).
+*   **Comunidad de Soporte:** Un espacio seguro donde compartir avances y sentirse comprendido.
 
 ---
 
-## �️ Innovación y Transparencia (Tech Specs)
-Para desarrolladores y curiosos, este proyecto es un referente de ingeniería moderna en el ecosistema **Google Cloud**:
+## 🛠️ Innovación Tecnológica al Servicio del Cuidado
+Desarrollado sobre el ecosistema **Google Cloud**, este proyecto garantiza seguridad, privacidad y accesibilidad total.
 
-*   **Frontend:** React + Vite (Velocidad extrema y animaciones fluidas).
-*   **Cerebro:** Python FastAPI en Google Cloud Run.
-*   **Motor IA:** Google Vertex AI (Gemini 1.5 Flash).
-*   **Infraestructura:** Serverless, segura y escalable globalmente.
+*   **Inteligencia Artificial Empática (Gemini Pro):** Un chat entrenado para ofrecer contención emocional y respuestas técnicas sobre el método.
+*   **Accesibilidad Universal:** Interfaz diseñada para ser usada por personas mayores y con baja visión (alto contraste, fuentes legibles).
+*   **Aplicación Progresiva (PWA):** Funciona como una App instalable en el móvil, permitiendo acceso a las herramientas incluso sin conexión a internet en momentos críticos.
 
 ---
-© 2025 Método Activa. **Arte, Ciencia y Tecnología.**
-[www.metodoactiva.es](https://project-c465bc45-299b-470d-8b6.web.app)
+
+## 📞 Únete al Movimiento
+
+¿Eres terapeuta, cuidador o simplemente alguien que cree en el poder sanador del arte?
+Este es tu lugar.
+
+*   **Web Oficial:** [metodoactiva.es](https://project-c465bc45-299b-470d-8b6.web.app)
+*   **Contacto:** info@metodoactiva.es
+*   **Autora:** Aurora Del Río
+
+---
+© 2025 Método Activa. **Cultura y Salud unidas por el bienestar.**
