@@ -1,129 +1,47 @@
-# 🧠 Método Activa: Plataforma de Neuroestética & IA
+# 🎵 Método Activa: El Arte de Conectar
 
-**El Arte de Conectar: Salud Mental, Musicoterapia e Inteligencia Artificial.**
+> **"Donde la Neurociencia se encuentra con la Emoción."**
 
-[![Cloud Run](https://img.shields.io/badge/Backend-Cloud_Run-4285F4?style=flat-square&logo=google-cloud&logoColor=white)](https://cloud.google.com/run)
-[![Vertex AI](https://img.shields.io/badge/AI-Vertex_Gemini-FFCA28?style=flat-square&logo=google&logoColor=black)](https://cloud.google.com/vertex-ai)
-[![Firebase Hosting](https://img.shields.io/badge/Frontend-Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black)](https://metodoactiva.es)
-[![React](https://img.shields.io/badge/UI-React_Vite-61DAFB?style=flat-square&logo=react&logoColor=black)](https://reactjs.org/)
-[![Status](https://img.shields.io/badge/Status-100%25_Operational-success?style=flat-square&logo=checkmarx)]()
+[![Website](https://img.shields.io/badge/Visitar-Web_Oficial-EC008C?style=for-the-badge&logo=google-chrome&logoColor=white)](https://project-c465bc45-299b-470d-8b6.web.app)
+[![AI](https://img.shields.io/badge/Powered_By-Aurora_AI-F7941D?style=for-the-badge&logo=google-gemini&logoColor=white)]()
 
-> **"Más allá de una web, un ecosistema vivo."**
-> Este repositorio aloja la infraestructura digital completa de **Método Activa**. Una arquitectura Monorepo de grado empresarial diseñada para la excelencia, influencia y conversión.
+**Método Activa** es la plataforma digital oficial de **Aurora Del Río**, diseñada para transformar la manera en que entendemos la musicoterapia y la salud cognitiva. Más que una web, es una experiencia inmersiva de calma, conexión y tecnología puesta al servicio de las personas.
 
 ---
 
-## 🏛️ Arquitectura del Sistema (Google Ecosystem)
+## ✨ La Experiencia
+Explora cómo la tecnología se fusiona con el bienestar:
 
-El proyecto opera bajo un modelo **Serverless Enterprise** alojado 100% en Google Cloud Platform:
+### 🧠 Inteligencia Artificial Empática
+Conoce a **"Aurora"**, nuestra asistente virtual. A diferencia de los chatbots tradicionales, Aurora ha sido entrenada con principios de psicología y musicoterapia. No solo responde dudas; escucha, entiende el contexto emocional y ofrece apoyo las 24/7 con un tono cálido y humano.
 
-```mermaid
-graph LR
-    User[👤 Usuario] -->|HTTPS| Firebase[🔥 Firebase Hosting CDN]
-    Firebase -->|Static Assets| React[⚛️ Frontend (React/Vite)]
-    Firebase -->|/api/v1/chat (Proxy)| CloudRun[☁️ Cloud Run (Python FastAPI)]
-    CloudRun -->|Reasoning| VertexAI[🧠 Vertex AI (Gemini Flash)]
-    CloudRun -->|Logs| Logging[📋 Cloud Logging]
-```
+### 🎨 Neuroestética Digital
+Cada color, animación y espacio de esta plataforma ha sido diseñado siguiendo principios neurológicos.
+*   **Diseño Calmante:** Reduce la carga cognitiva y genera paz mental al navegar.
+*   **Navegación Inercial:** Un desplazamiento suave ("Luxury Scroll") que da peso y elegancia a la experiencia.
 
-### 1. ⚛️ Frontend (La Cara) - `/frontend`
-*   **Tecnología:** React 18 + Vite + TailwindCSS.
-*   **Influencia & UX:**
-    *   **Neuroestética:** Diseño calmante optimizado para retención.
-    *   **Luxury Scroll:** Navegación inercial con `Lenis` (Efecto Apple).
-    *   **PWA Elite:** Instalable, Offline-First, Iconos Adaptativos.
-    *   **Social Proof:** Notificaciones de ventas en tiempo real (" FOMO").
-    *   **Conversion:** Botón flotante WhatsApp VIP y efectos confetti.
-
-### 2. 🧠 Backend (El Cerebro) - `/backend`
-*   **Tecnología:** Python FastAPI + Uvicorn.
-*   **Infraestructura:** Google Cloud Run (Auto-escalable a cero).
-*   **Inteligencia:**
-    *   **Agente Aurora:** Personalidad empática impulsada por **Vertex AI (Gemini 1.5 Flash)**.
-    *   **Seguridad Zero-Trust:** CORS estricto y validación de orígenes.
-    *   **Rendimiento:** Latencia de respuesta < 200ms (Warm instances).
+### 📱 Tecnología Invisible
+*   **Acceso Instantáneo:** Funciona como una App nativa en tu móvil (PWA). Sin descargas, disponible offline.
+*   **Conexión Humana:** Integración directa con WhatsApp para hablar con personas reales cuando lo necesites.
+*   **Comunidad Viva:** Visualización en tiempo real de la comunidad que está transformando sus vidas con el método.
 
 ---
 
-## 📂 Estructura Monorepo
+## � Sobre el Método
+El **Método Activa** utiliza la música, el ritmo y el movimiento para reactivar la memoria en mayores y fomentar el vínculo emocional en niños. Es una metodología probada que ahora, gracias a esta plataforma, está al alcance de todos.
 
-```bash
-METODOACTIVA.ES/
-├── frontend/            # ⚛️ La Aplicación Web
-│   ├── src/             # Código fuente React
-│   │   ├── hooks/       # useAuroraAI (Conexión segura)
-│   │   └── components/  # SalesNotification, FloatingWhatsApp, etc.
-│   ├── public/          # Manifest.json, Robots.txt, Sitemap
-│   └── vite.config.js   # Build optimizado
-│
-├── backend/             # 🐍 El Servidor de IA
-│   ├── app/             # Lógica FastAPI (server.py, routes)
-│   ├── Dockerfile       # Contenedor para Cloud Run
-│   └── requirements.txt # Dependencias Python
-│
-├── cloudbuild.yaml      # 🏭 Pipeline CI/CD Maestro (Frontend + Backend)
-├── firebase.json        # 🌐 Reglas de Hosting & Proxy Inverso
-└── README.md            # Documentación
-```
+> *"La música no es solo arte, es biología."* — Aurora Del Río.
 
 ---
 
-## 🚀 Instalación y Despliegue
+## �️ Innovación y Transparencia (Tech Specs)
+Para desarrolladores y curiosos, este proyecto es un referente de ingeniería moderna en el ecosistema **Google Cloud**:
 
-### Requisitos Previos
-*   Node.js v18+
-*   Python 3.10+
-*   Google Cloud CLI (`gcloud`)
-
-### 1. Desarrollo Local (Frontend)
-```bash
-cd frontend
-npm install
-npm run dev
-# Accede a http://localhost:5173
-```
-
-### 2. Desarrollo Local (Backend)
-```bash
-cd backend
-pip install -r requirements.txt
-uvicorn app.server:app --reload
-# Swagger UI en http://localhost:8000/docs
-```
-
-### 3. Despliegue a Producción (Automático)
-Este proyecto utiliza **Google Cloud Build** para CI/CD continuo.
-Simplemente haz push a la rama `main`:
-
-```bash
-git add .
-git commit -m "feat: New awesome feature"
-git push origin main
-```
-
-**Lo que ocurre en la nube:**
-1.  Se construye el contenedor Docker del Backend.
-2.  Se despliega a **Cloud Run**.
-3.  Se compila el Frontend (Vite Build).
-4.  Se despliega a **Firebase Hosting**.
-5.  Todo se sincroniza automáticamente.
+*   **Frontend:** React + Vite (Velocidad extrema y animaciones fluidas).
+*   **Cerebro:** Python FastAPI en Google Cloud Run.
+*   **Motor IA:** Google Vertex AI (Gemini 1.5 Flash).
+*   **Infraestructura:** Serverless, segura y escalable globalmente.
 
 ---
-
-## 🏆 Protocolo de Influencia (Características Top)
-
-*   **Puntuación SEO:** 100/100 (Sitemaps dinámicos, Meta tags, Schema.org).
-*   **Accesibilidad:** Cumplimiento WCAG 2.1 (ARIA labels, contraste).
-*   **Seguridad:** Cabeceras HTTP estrictas, `robots.txt` blindado.
-*   **Performance:** Carga de activos diferida (Lazy Loading) y pre-caching.
-
----
-
-## 📞 Créditos & Soporte
-
-*   **Autora:** Aurora Del Río (Musicoterapeuta & Creadora).
-*   **Ingeniería:** ECONEURA EMPRESA (AI Division).
-*   **Contacto:** [info@metodoactiva.es](mailto:info@metodoactiva.es)
-
----
-© 2025 Método Activa. **Ingeniería de Excelencia.**
+© 2025 Método Activa. **Arte, Ciencia y Tecnología.**
+[www.metodoactiva.es](https://project-c465bc45-299b-470d-8b6.web.app)
