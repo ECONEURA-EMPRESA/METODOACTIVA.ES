@@ -1,0 +1,15 @@
+
+> metodo-activa@0.0.0 build
+> vite build
+
+[36mvite v7.2.6 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32mÔ£ô[39m 1723 modules transformed.
+Ô£ù Build failed in 7.29s
+error during build:
+Could not resolve entry module "framer-motion".
+    at getRollupError (file:///C:/Users/Usuario/METODO-ACTIVA/METODOACTIVA/node_modules/rollup/dist/es/shared/parseAst.js:401:41)
+    at error (file:///C:/Users/Usuario/METODO-ACTIVA/METODOACTIVA/node_modules/rollup/dist/es/shared/parseAst.js:397:42)
+    at ModuleLoader.loadEntryModule (file:///C:/Users/Usuario/METODO-ACTIVA/METODOACTIVA/node_modules/rollup/dist/es/shared/node-entry.js:21611:20)
+    at async Promise.all (index 0)
+    at async Promise.all (index 0)

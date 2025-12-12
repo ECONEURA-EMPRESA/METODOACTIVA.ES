@@ -1,0 +1,19 @@
+----------------------------- REMOTE BUILD OUTPUT ------------------------------
+starting build "7869e71b-2b0e-407d-849b-c1ebf45124ab"
+
+FETCHSOURCE
+Fetching storage object: gs://project-c465bc45-299b-470d-8b6_cloudbuild/source/1765560184.10606-99be7fb449ba4836b5d92bc1e5781b65.tgz#1765560183747330
+Copying gs://project-c465bc45-299b-470d-8b6_cloudbuild/source/1765560184.10606-99be7fb449ba4836b5d92bc1e5781b65.tgz#1765560183747330...
+/ [0 files][    0.0 B/  3.9 KiB]                                                
+/ [1 files][  3.9 KiB/  3.9 KiB]                                                
+
+Operation completed over 1 objects/3.9 KiB.                                      
+BUILD
+Already have image (with digest): gcr.io/cloud-builders/gcb-internal
+Sending build context to Docker daemon  15.36kB
+
+
+Error response from daemon: dockerfile parse error line 41: unknown instruction: PORT
+ERROR
+ERROR: build step 0 "gcr.io/cloud-builders/gcb-internal" failed: step exited with non-zero status: 1
+--------------------------------------------------------------------------------
