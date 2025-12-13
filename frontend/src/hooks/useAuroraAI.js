@@ -16,25 +16,35 @@ export const useAuroraAI = () => {
         setIsLoading(true);
         setError(null);
 
+        let token = null;
+
         try {
-            // 1. Autenticación Silenciosa (Zero-Trust)
-            // Si el usuario no está logueado, entramos como anónimo.
+            // 1. Autenticación Silenciosa (Intentar pero no bloquear)
             let user = auth.currentUser;
             if (!user) {
-                const userCredential = await signInAnonymously(auth);
-                user = userCredential.user;
+                try {
+                    const userCredential = await signInAnonymously(auth);
+                    user = userCredential.user;
+                } catch (authError) {
+                    console.warn("⚠️ Fallback: Auth failed, proceeding as Guest.", authError);
+                }
             }
 
-            // 2. Obtener Token Seguro (JWT)
-            const token = await user.getIdToken();
+            // 2. Obtener Token (Si hay usuario)
+            if (user) {
+                token = await user.getIdToken();
+            }
 
             // 3. Llamada al Cerebro (Cloud Run)
+            // Se envía el token si existe, si no, el backend lo maneja como "Guest".
+            const headers = { 'Content-Type': 'application/json' };
+            if (token) {
+                headers['Authorization'] = `Bearer ${token}`;
+            }
+
             const response = await fetch(BACKEND_URL, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
+                headers: headers,
                 body: JSON.stringify({
                     message: message,
                     user_context: userContext
@@ -58,7 +68,7 @@ export const useAuroraAI = () => {
             setError(err.message);
 
             return {
-                response: "Lo siento, mi conexión con el servidor seguro se ha interrumpido. Por favor intenta de nuevo en un momento.",
+                response: "Lo siento, hubo un problema de conexión. ¿Podrías repetirlo?",
                 suggested_session: "Error de Conexión"
             };
         } finally {

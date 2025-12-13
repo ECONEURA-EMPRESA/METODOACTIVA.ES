@@ -522,3 +522,47 @@ html {
     transform: translateY(0);
   }
 }
+
+/* --- NEW PREMIUM ADDITIONS FOR FLUIDITY & DEPTH --- */
+/* Fluid Parametric Separators Removed */
+
+/* 2. Advanced Mesh Gradient (Fluid Background) */
+/* 2. Advanced Mesh Gradient (Fluid Background 2.0) */
+.bg-mesh-premium {
+  background-color: #f8fafc;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E"),
+    radial-gradient(at 0% 0%, rgba(236, 0, 140, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(0, 174, 239, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(247, 148, 29, 0.10) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, rgba(236, 0, 140, 0.08) 0px, transparent 50%),
+    linear-gradient(to bottom, #ffffff 0%, rgba(248, 250, 252, 0) 100%);
+  background-attachment: fixed;
+  background-size: 200px 200px, 120% 120%, 120% 120%, 120% 120%, 120% 120%, 100% 100%;
+  animation: auroraFlow 25s ease-in-out infinite alternate;
+}
+
+/* 3. Deep Glass Cards */
+.card-premium-3d {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 10px 40px -10px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-premium-3d:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow:
+    0 20px 50px -12px rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgba(236, 0, 140, 0.1) inset;
+  /* Brand pink subtle highlight */
+}
+
+/* 4. Section Transition Fade */
+.section-fade-mask {
+  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+}

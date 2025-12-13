@@ -12,8 +12,8 @@ class VertexService:
         
         genai.configure(api_key=settings.GEMINI_API_KEY)
         
-        # Modelo Gemini Pro optimizado
-        self.model = genai.GenerativeModel('gemini-1.5-flash')
+        # Modelo Gemini Disponible
+        self.model = genai.GenerativeModel('gemini-2.5-flash')
 
     async def generate_response(self, user_message: str, user_context: str) -> str:
         """

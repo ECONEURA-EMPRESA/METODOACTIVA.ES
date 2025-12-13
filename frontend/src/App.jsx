@@ -32,17 +32,38 @@ const LoadingSpinner = () => (
   </div>
 );
 
+import ScrollProgressBar from './components/ui/ScrollProgressBar';
+import PremiumLoader from './components/ui/PremiumLoader';
+
 function App() {
+  const [loading, setLoading] = useState(true);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const openChat = () => setIsChatOpen(true);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  // scrollProgress removed for performance
   const [showLeadModal, setShowLeadModal] = useState(false);
   const [showContentModal, setShowContentModal] = useState(false);
   const [hasRegistered, setHasRegistered] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [showCookieBanner, setShowCookieBanner] = useState(false);
+
+  // Video Ref for deferred playback
+  const videoRef = React.useRef(null);
+
+  useEffect(() => {
+    // Simulate premium loading experience (Extended for asset load)
+    const timer = setTimeout(() => {
+      setLoading(false);
+      // Play video only AFTER loader is gone
+      setTimeout(() => {
+        if (videoRef.current) {
+          videoRef.current.play().catch(e => console.log("Auto-play prevented:", e));
+        }
+      }, 100);
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     let ticking = false;
@@ -50,10 +71,6 @@ function App() {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           setScrolled(window.scrollY > 20);
-          // Calculate scroll progress
-          const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-          const progress = (window.scrollY / totalHeight) * 100;
-          setScrollProgress(Math.min(progress, 100));
           ticking = false;
         });
         ticking = true;
@@ -102,6 +119,8 @@ function App() {
     triggerConfetti(); // 🎉 DOPAMINE HIT
   };
 
+  if (loading) return <PremiumLoader />;
+
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-[#EC008C] selection:text-white pb-20 md:pb-0">
 
@@ -114,13 +133,8 @@ function App() {
       {/* 6. WhatsApp VIP */}
       <FloatingWhatsApp />
 
-      {/* Scroll Progress Bar */}
-      <div className="fixed top-0 left-0 w-full h-1 z-[60] bg-gray-200/50">
-        <div
-          className="h-full bg-gradient-to-r from-[#EC008C] via-[#F7941D] to-[#00AEEF] transition-all duration-150 ease-out"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
+      {/* Scroll Progress Bar (Optimized) */}
+      <ScrollProgressBar />
 
       <AuroraCursor />
       <Navbar
@@ -139,7 +153,7 @@ function App() {
         openAmazon={openAmazon}
       />
 
-      <div id="hero" className="relative pt-12 pb-20 bg-white overflow-hidden">
+      <div id="hero" className="relative pt-12 pb-24 bg-mesh-premium overflow-hidden rounded-b-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] z-10">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#EC008C] rounded-full blur-[180px] opacity-10 pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#2DD6F5] rounded-full blur-[180px] opacity-10 pointer-events-none"></div>
 
@@ -205,11 +219,11 @@ function App() {
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-gradient-to-tr from-[#F7941D] via-[#EC008C] to-[#00AEEF] rounded-full blur-[100px] opacity-20 group-hover:opacity-30 transition-opacity duration-700"></div>
                   <div className="relative z-10 rounded-2xl shadow-[20px_20px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden cursor-pointer" onClick={openAmazon}>
                     <video
-                      autoPlay
+                      ref={videoRef}
                       loop
                       muted
                       playsInline
-                      className="w-full rounded-2xl shadow-xl"
+                      className="w-full rounded-2xl shadow-xl will-change-transform"
                       poster={IMAGES.bookMockup}
                     >
                       <source src="/promo.mp4" type="video/mp4" />
@@ -223,8 +237,8 @@ function App() {
         </div>
       </div >
 
-      <Section id="beneficios" className="bg-white">
-        <div className="container mx-auto px-6">
+      <Section id="beneficios" className="bg-white rounded-[3rem] my-8 mx-4 md:mx-8 shadow-xl border border-white/50 relative z-20">
+        <div className="container mx-auto px-6 py-12">
           <div className="text-center mb-16">
             <p className="text-gray-600 max-w-2xl mx-auto">{CONTENT.benefits.subtitle}</p>
           </div>
@@ -253,7 +267,7 @@ function App() {
               <div className="relative w-full aspect-[3/4] max-w-sm mx-auto animate-breathe">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#EC008C] to-[#00AEEF] rounded-full blur-[80px] opacity-30 animate-pulse"></div>
                 <img
-                  src="/connection-art.png"
+                  src="/connection-art.webp"
                   alt="Arte de Conexión"
                   className="relative z-10 w-full h-full object-cover rounded-3xl shadow-2xl hover:scale-[1.02] transition-transform duration-500"
                 />
@@ -279,8 +293,8 @@ function App() {
         </div>
       </Section>
 
-      <Section id="recursos" className="bg-gray-50">
-        <div className="container mx-auto px-6">
+      <Section id="recursos" className="bg-white rounded-[3rem] my-8 mx-4 md:mx-8 shadow-xl border border-white/50 relative z-20">
+        <div className="container mx-auto px-6 py-12">
           <div className="text-center mb-16"><h2 className="text-3xl font-bold text-gray-900 mb-4">{CONTENT.resources.title}</h2><p className="text-gray-500 max-w-2xl mx-auto mb-8">{CONTENT.resources.subtitle}</p><Button onClick={handleAccessRequest} className="mx-auto group" variant="primary"><Download size={20} className="group-hover:animate-bounce" /> {CONTENT.resources.cta_download}</Button></div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="space-y-8">
@@ -316,8 +330,8 @@ function App() {
 
 
 
-      <Section id="reviews" className="bg-gray-50">
-        <div className="container mx-auto px-6">
+      <Section id="reviews" className="bg-white rounded-[3rem] my-8 mx-4 md:mx-8 shadow-xl border border-white/50 relative z-20">
+        <div className="container mx-auto px-6 py-12">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-2">{CONTENT.reviews.title}</h2>
@@ -327,7 +341,7 @@ function App() {
           </div>
           <div className="grid md:grid-cols-3 gap-6 perspective-[1000px]">
             {CONTENT.reviews.items.map((review, idx) => (
-              <div key={idx} className={`depth-card bg-white rounded-2xl h-full ${idx === 1 ? 'md:translate-y-4' : ''}`}>
+              <div key={idx} className={`depth-card bg-mesh-premium p-6 rounded-2xl h-full border border-gray-100 ${idx === 1 ? 'md:translate-y-4' : ''}`}>
                 <AmazonReviewCard title={review.title} author={review.author} date={review.date} text={review.text} />
               </div>
             ))}
@@ -335,12 +349,12 @@ function App() {
         </div>
       </Section>
 
-      <Section id="autor" className="bg-white">
-        <div className="container mx-auto px-6">
+      <Section id="autor" className="bg-white rounded-[3rem] my-8 mx-4 md:mx-8 shadow-xl border border-white/50 relative z-20">
+        <div className="container mx-auto px-6 py-12">
           <div className="glass-panel max-w-5xl mx-auto rounded-3xl p-10 md:p-14 text-gray-900 flex flex-col md:flex-row items-center gap-12 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-white/60 relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-[#EC008C]/10 to-transparent rounded-full blur-3xl pointer-events-none group-hover:opacity-100 opacity-50 transition-opacity"></div>
             <div className="w-40 h-40 md:w-56 md:h-56 rounded-full bg-white flex-shrink-0 overflow-hidden border-[6px] border-white shadow-2xl relative z-10 hover:scale-105 transition-transform duration-500">
-              <img src="/aurora.jpg" alt="Aurora Del Río" className="w-full h-full object-cover object-center" style={{ objectPosition: 'center 30%' }} />
+              <img src="/aurora.webp" alt="Aurora Del Río" className="w-full h-full object-cover object-center" style={{ objectPosition: 'center 30%' }} />
             </div>
             <div className="text-center md:text-left relative z-10">
               <h3 className="text-4xl md:text-5xl font-black mb-2 text-gray-900 tracking-tight drop-shadow-sm">Aurora Del Río</h3>
@@ -402,23 +416,25 @@ function App() {
       </footer>
 
       {/* Cookie Banner (Polished & Trust) */}
-      {showCookieBanner && (
-        <div id="cookie-banner" className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 bg-white/95 backdrop-blur-xl border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.12)] rounded-2xl p-6 z-50 animate-slide-up-fade">
-          <div className="flex items-start gap-3">
-            <div className="bg-gray-100 p-2 rounded-full"><ShieldCheck size={20} className="text-gray-600" /></div>
-            <div>
-              <h4 className="font-bold text-gray-900 mb-1">Tu privacidad importa</h4>
-              <p className="text-xs text-gray-500 leading-relaxed mb-4">
-                Utilizamos cookies para mejorar tu experiencia y medir el rendimiento. Al seguir navegando, aceptas su uso.
-              </p>
-              <div className="flex gap-2">
-                <button onClick={() => setShowCookieBanner(false)} className="flex-1 py-2 text-xs font-semibold text-gray-500 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">Rechazar</button>
-                <button onClick={acceptCookies} className="flex-1 py-2 text-xs font-bold text-white bg-gray-900 rounded-lg hover:bg-black transition-colors shadow-md">Aceptar Todo</button>
+      {
+        showCookieBanner && (
+          <div id="cookie-banner" className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 bg-white/95 backdrop-blur-xl border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.12)] rounded-2xl p-6 z-50 animate-slide-up-fade">
+            <div className="flex items-start gap-3">
+              <div className="bg-gray-100 p-2 rounded-full"><ShieldCheck size={20} className="text-gray-600" /></div>
+              <div>
+                <h4 className="font-bold text-gray-900 mb-1">Tu privacidad importa</h4>
+                <p className="text-xs text-gray-500 leading-relaxed mb-4">
+                  Utilizamos cookies para mejorar tu experiencia y medir el rendimiento. Al seguir navegando, aceptas su uso.
+                </p>
+                <div className="flex gap-2">
+                  <button onClick={() => setShowCookieBanner(false)} className="flex-1 py-2 text-xs font-semibold text-gray-500 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">Rechazar</button>
+                  <button onClick={acceptCookies} className="flex-1 py-2 text-xs font-bold text-white bg-gray-900 rounded-lg hover:bg-black transition-colors shadow-md">Aceptar Todo</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
       {/* Sticky Mobile Bar */}
       <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 md:hidden z-50 shadow-[0_-5px_10px_rgba(0,0,0,0.05)] flex items-center justify-between pb-safe">

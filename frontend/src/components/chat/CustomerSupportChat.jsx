@@ -74,41 +74,102 @@ const CustomerSupportChat = ({ isOpen: externalIsOpen, onClose: externalOnClose 
         }
     };
 
-    // UI RENDER (Limpia, sin lógica compleja)
+    // UI RENDER (Premium Glass Architecture)
     return (
-        <div className="fixed bottom-6 right-6 z-[9999999] flex flex-col items-end pointer-events-none md:bottom-6 bottom-20">
+        <div className="fixed bottom-6 right-6 z-[9999999] flex flex-col items-end pointer-events-none md:bottom-8 bottom-24">
             {isOpen && (
-                <div className="pointer-events-auto mb-4 w-[90vw] md:w-[400px] h-[60vh] md:h-[550px] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden flex flex-col animate-in slide-in-from-bottom-10 fade-in duration-300">
-                    <div className="bg-gradient-to-r from-[#2DD6F5] to-[#00AEEF] p-4 text-white flex items-center justify-between shrink-0 shadow-md">
-                        <div className="flex items-center gap-3">
-                            <div className="bg-white/20 p-2 rounded-full backdrop-blur-sm"><MessageCircle className="text-white" size={20} /></div>
+                <div className="pointer-events-auto mb-6 w-[92vw] md:w-[380px] h-[65vh] md:h-[600px] bg-white/95 backdrop-blur-xl rounded-[2.5rem] shadow-[0_20px_60px_-10px_rgba(0,0,0,0.15)] border border-white/60 overflow-hidden flex flex-col animate-in slide-in-from-bottom-10 fade-in duration-300 ring-1 ring-gray-100">
+
+                    {/* Header Premium */}
+                    <div className="bg-gradient-to-r from-[#2DD6F5]/10 to-[#00AEEF]/10 p-5 flex items-center justify-between shrink-0 border-b border-gray-100 backdrop-blur-md">
+                        <div className="flex items-center gap-3.5">
+                            <div className="relative">
+                                <div className="absolute inset-0 bg-gradient-to-tr from-[#EC008C] to-[#00AEEF] rounded-full blur-md opacity-40 animate-pulse"></div>
+                                <div className="relative bg-white p-2.5 rounded-full shadow-sm border border-white">
+                                    <MessageCircle className="text-[#00AEEF]" size={22} />
+                                </div>
+                                <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-[2px] border-white"></div>
+                            </div>
                             <div>
-                                <h3 className="font-bold text-base tracking-wide leading-tight">Aurora - Método Activa</h3>
-                                <p className="text-blue-50 text-[10px] flex items-center gap-1 font-medium"><span className="w-1.5 h-1.5 bg-[#FFD200] rounded-full animate-pulse shadow-[0_0_8px_#FFD200]"></span>En línea (Real AI)</p>
+                                <h3 className="font-bold text-gray-900 text-lg leading-tight">Aurora AI</h3>
+                                <p className="text-gray-500 text-xs font-medium">Asistente Virtual • <span className="text-green-600">En línea</span></p>
                             </div>
                         </div>
-                        <button onClick={toggleOpen} className="p-1 hover:bg-white/20 rounded-full transition-colors"><X size={20} /></button>
+                        <button onClick={toggleOpen} className="p-2 hover:bg-gray-100/50 rounded-full transition-all text-gray-400 hover:text-gray-600 hover:rotate-90 duration-300">
+                            <X size={20} />
+                        </button>
                     </div>
-                    <div className="flex-1 overflow-y-auto p-4 bg-slate-50 space-y-4 scroll-smooth">
-                        <div className="p-2 bg-indigo-50 border border-indigo-100 rounded-lg text-xs text-indigo-800 text-center mb-4">✨ Conectada a Gemini 2.0 Flash Lite.</div>
+
+                    {/* Chat Area */}
+                    <div className="flex-1 overflow-y-auto p-5 space-y-5 scroll-smooth bg-gradient-to-b from-transparent to-gray-50/50">
+                        <div className="flex justify-center">
+                            <span className="text-[10px] font-bold tracking-widest text-gray-400 uppercase bg-gray-50 px-3 py-1 rounded-full border border-gray-100">Hoy</span>
+                        </div>
+
                         {messages.map((msg, idx) => (
-                            <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-fadeIn`}>
-                                <div className={`max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed shadow-sm ${msg.role === 'user' ? 'bg-[#00AEEF] text-white rounded-tr-none' : 'bg-white text-gray-700 border border-gray-100 rounded-tl-none'}`}>{msg.text}</div>
+                            <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in slide-in-from-bottom-2 fade-in duration-300`}>
+                                <div className={`max-w-[85%] p-4 text-[14px] leading-relaxed shadow-sm transition-all hover:shadow-md
+                                    ${msg.role === 'user'
+                                        ? 'bg-gradient-to-br from-[#00AEEF] to-[#008CCF] text-white rounded-[1.3rem] rounded-tr-sm'
+                                        : 'bg-white text-gray-700 border border-white shadow-[0_2px_10px_rgba(0,0,0,0.03)] rounded-[1.3rem] rounded-tl-sm'
+                                    }`}>
+                                    {msg.text}
+                                </div>
                             </div>
                         ))}
-                        {loading && <div className="flex justify-start"><div className="bg-white p-3 rounded-2xl rounded-tl-none border border-gray-100 shadow-sm flex gap-1 items-center h-10"><Loader2 className="animate-spin text-gray-400" size={16} /></div></div>}
+
+                        {loading && (
+                            <div className="flex justify-start animate-in fade-in duration-300">
+                                <div className="bg-white p-4 rounded-[1.3rem] rounded-tl-sm border border-gray-100 shadow-sm flex gap-2 items-center">
+                                    <div className="w-1.5 h-1.5 bg-[#EC008C] rounded-full animate-bounce"></div>
+                                    <div className="w-1.5 h-1.5 bg-[#00AEEF] rounded-full animate-bounce [animation-delay:0.2s]"></div>
+                                    <div className="w-1.5 h-1.5 bg-[#F7941D] rounded-full animate-bounce [animation-delay:0.4s]"></div>
+                                </div>
+                            </div>
+                        )}
                         <div ref={messagesEndRef} />
                     </div>
-                    <div className="p-3 bg-white border-t border-gray-100 shrink-0 flex gap-2">
-                        <input ref={inputRef} onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()} type="text" className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#00AEEF] outline-none text-sm" placeholder="Escribe..." value={input} onChange={(e) => setInput(e.target.value)} disabled={loading} />
-                        <button onClick={handleSendMessage} disabled={loading || !input.trim()} className="bg-[#00AEEF] text-white p-3 rounded-xl hover:bg-[#008CCF] disabled:opacity-50 transition-colors"><Send size={18} /></button>
+
+                    {/* Input Area */}
+                    <div className="p-4 bg-white/80 border-t border-gray-100 shrink-0 backdrop-blur-md">
+                        <div className="relative flex items-center gap-2 bg-gray-50 p-1.5 rounded-[1.5rem] border border-gray-200 focus-within:border-[#00AEEF]/50 focus-within:ring-4 focus-within:ring-[#00AEEF]/10 transition-all shadow-inner">
+                            <input
+                                ref={inputRef}
+                                onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+                                type="text"
+                                className="w-full p-3 bg-transparent outline-none text-sm text-gray-700 placeholder:text-gray-400 ml-2"
+                                placeholder="Escribe un mensaje..."
+                                value={input}
+                                onChange={(e) => setInput(e.target.value)}
+                                disabled={loading}
+                            />
+                            <button
+                                onClick={handleSendMessage}
+                                disabled={loading || !input.trim()}
+                                className="p-3 bg-[#00AEEF] text-white rounded-full hover:bg-[#008CCF] disabled:opacity-50 disabled:hover:bg-[#00AEEF] transition-all hover:scale-105 active:scale-95 shadow-md"
+                            >
+                                <Send size={18} className={loading ? 'opacity-0' : 'opacity-100'} />
+                                {loading && <Loader2 size={18} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin" />}
+                            </button>
+                        </div>
+                        <div className="text-center mt-2.5">
+                            <p className="text-[10px] text-gray-400 flex items-center justify-center gap-1">
+                                <span className="w-1.5 h-1.5 rounded-full bg-green-500/50"></span>
+                                Respuesta instantánea con IA
+                            </p>
+                        </div>
                     </div>
                 </div>
             )}
             {!isOpen && (
-                <button onClick={toggleOpen} className="pointer-events-auto group flex items-center gap-3 bg-[#00AEEF] hover:bg-[#008CCF] text-white p-4 rounded-full shadow-[0_8px_30px_rgba(0,174,239,0.4)] transition-all hover:scale-110 active:scale-95 animate-bounce-subtle">
-                    <span className="hidden md:block font-bold pr-1">¿Hablamos?</span>
-                    <MessageCircle size={28} />
+                <button
+                    onClick={toggleOpen}
+                    className="pointer-events-auto group flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#00AEEF] to-[#008CCF] text-white rounded-full shadow-[0_8px_30px_rgba(0,174,239,0.3)] transition-all hover:scale-110 hover:shadow-[0_15px_40px_rgba(0,174,239,0.4)] active:scale-95 z-50 animate-bounce-subtle ring-4 ring-white/50"
+                >
+                    <MessageCircle size={32} className="group-hover:rotate-12 transition-transform duration-300" />
+                    <span className="absolute top-0 right-0 flex h-4 w-4">
+
+                    </span>
                 </button>
             )}
         </div>

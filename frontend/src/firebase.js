@@ -2,14 +2,14 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getFunctions } from 'firebase/functions';
 
-// Firebase configuration using environment variables (Vite prefix VITE_)
+// Firebase configuration (Hardcoded for Guaranteed Connectivity v5.0)
 const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID
+    apiKey: "AIzaSyD6781MucdFE3yH3wdpjVW23YfCjH2ZCuQ",
+    authDomain: "project-c465bc45-299b-470d-8b6.firebaseapp.com",
+    projectId: "project-c465bc45-299b-470d-8b6",
+    storageBucket: "project-c465bc45-299b-470d-8b6.appspot.com",
+    messagingSenderId: "476151355322",
+    appId: "1:476151355322:web:641875880086"
 };
 
 import { getAuth } from 'firebase/auth';

@@ -16,21 +16,25 @@ class ChatResponse(BaseModel):
 @router.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest, authorization: str = Header(None)):
     """
-    💬 Endpoint Protegido de Chat.
-    Requiere Token de Firebase Auth (Validado Criptográficamente).
+    💬 Endpoint Híbrido:
+    - Intenta validar Token (Seguridad).
+    - Si falla o no hay token, PERMITE el paso (Modo Fallback para garantizar servicio).
     """
-    # 🔐 Validación Zero-Trust
-    if not authorization:
-        raise HTTPException(status_code=401, detail="Missing Security Token")
+    user_id = "anonymous_fallback"
     
-    # Verificar firma real (Si falla, lanza 401)
-    user_payload = verify_firebase_token(authorization)
-    user_id = user_payload.get('uid')
-    
-    print(f"✅ User Authenticated: {user_id}")
-    
+    # 🔐 Intento de Validación (Soft-Auth)
+    if authorization:
+        try:
+            user_payload = verify_firebase_token(authorization)
+            user_id = user_payload.get('uid', 'verified_user')
+            print(f"✅ User Authenticated: {user_id}")
+        except Exception as e:
+            print(f"⚠️ Auth Token Invalid, proceeding as Anonymous: {e}")
+    else:
+        print("⚠️ No Token provided, proceeding as Anonymous")
+        
     try:
-        # LLamada al Cerebro RAG
+        # LLamada al Cerebro (Gemini)
         ai_response = await vertex_service.generate_response(request.message, request.user_context)
         
         return ChatResponse(

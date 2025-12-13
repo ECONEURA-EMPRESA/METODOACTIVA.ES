@@ -10,7 +10,7 @@
             {
                 "source": "/api/**",
                 "run": {
-                    "serviceId": "metodo-activa-brain",
+                    "serviceId": "metodo-activa-brain-v2",
                     "region": "us-central1"
                 }
             },
