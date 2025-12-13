@@ -120,10 +120,13 @@ const CustomerSupportChat = ({ isOpen: externalIsOpen, onClose: externalOnClose 
 
                         {loading && (
                             <div className="flex justify-start animate-in fade-in duration-300">
-                                <div className="bg-white p-4 rounded-[1.3rem] rounded-tl-sm border border-gray-100 shadow-sm flex gap-2 items-center">
-                                    <div className="w-1.5 h-1.5 bg-[#EC008C] rounded-full animate-bounce"></div>
-                                    <div className="w-1.5 h-1.5 bg-[#00AEEF] rounded-full animate-bounce [animation-delay:0.2s]"></div>
-                                    <div className="w-1.5 h-1.5 bg-[#F7941D] rounded-full animate-bounce [animation-delay:0.4s]"></div>
+                                <div className="bg-white p-3 px-4 rounded-[1.3rem] rounded-tl-sm border border-gray-100 shadow-sm flex items-center gap-3">
+                                    <div className="flex gap-1">
+                                        <div className="w-2 h-2 bg-[#EC008C] rounded-full animate-bounce"></div>
+                                        <div className="w-2 h-2 bg-[#00AEEF] rounded-full animate-bounce [animation-delay:0.2s]"></div>
+                                        <div className="w-2 h-2 bg-[#F7941D] rounded-full animate-bounce [animation-delay:0.4s]"></div>
+                                    </div>
+                                    <span className="text-xs text-gray-500 font-medium animate-pulse">Aurora está razonando...</span>
                                 </div>
                             </div>
                         )}
