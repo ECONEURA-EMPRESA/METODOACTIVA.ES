@@ -1,0 +1,41 @@
+services:
+  # ---------------------------------------------------------------------------
+  # 🌍 FRONTEND (Vite + React)
+  # ---------------------------------------------------------------------------
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8080/api/v1
+    volumes:
+      - ./apps/web:/app
+      - /app/node_modules
+    depends_on:
+      - api
+    networks:
+      - monorepo-network
+
+  # ---------------------------------------------------------------------------
+  # 🧠 BACKEND (FastAPI + Python)
+  # ---------------------------------------------------------------------------
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - ENVIRONMENT=development
+      - ALLOWED_ORIGINS=["http://localhost:5173"]
+    volumes:
+      - ./apps/api:/app
+    networks:
+      - monorepo-network
+
+networks:
+  monorepo-network:
+    driver: bridge
